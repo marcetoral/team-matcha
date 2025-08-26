@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Team Matcha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .font {
+      font-family: "Reenie Beanie", cursive;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #f6f2e0;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      cursor: url('data:image/x-icon;base64,AAACAAEAICAQAAAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAOVQsAGbWYABf41kA////AKH/nABy2WwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAEREAAAAAAAAAAAAAAAAREURBAAAAAAAAAAAAAAERRERmEQAAAAAAAAAAAAARRGZmYVUQAAAAAAAAAAABFGZmZmFVEAAAAAAAAAAAAUZmZmYVZRAAAAAAAAAAABFGZmZhVmUQAAAAAAAAAAAUZmZmYVZlEAAAAAAAAAAAFGZmZhVmUQAAAAAAAAAAARRmZmFWZlEAAAAAAAAAAAFGZmYVZmZRAAAAAAAAAAABRmZhVmZlEAAAAAAAAAAAAUZmFWZmZRAAAAAAAAAAAAFGYVZmZlEAAAAAAAAAAAABRhVmZmUQAAAAAAAAAAAAAUYVZjVREAAAAAAAAAAAAAFBVjVREQAAAAAAAAAAAAABQlVREQAAAAAAAAAAAAAAARUREQAAAAAAAAAAAAAAAAEREAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAD///////////////////////////////////////9////+f////v////z////h///+Af//8AH//+AA///AAP//wAD//4AA//+AAP//gAH//wAB//8AAf//AAP//wAD//8AB///AA///wAP//8AH///AH///wH///8P////P////w=='), auto;
+    }
+
+    header {
+      background: #3a5a40;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #a7c957;
+    }
+
+    main {
+      flex: 1;
+      padding: 1rem;
+    }
+
+    .section {
+      display: none;
+      padding: 1rem;
+      max-width: 1000px;
+      margin: auto;
+      border-radius: 20px;
+      animation: fadeIn 0.5s;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    h2 {
+      color: #3a5a40;
+      margin-top: 0;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1rem 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .card img {
+      width: 200px;
+      /* ancho fijo */
+      height: 150px;
+      /* alto fijo */
+      border-radius: 10px;
+      flex-shrink: 0;
+      object-fit: cover;
+      /* recorta la imagen para llenar el espacio */
+    }
+
+    footer {
+      background: #3a5a40;
+      color: white;
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+
+    /* Carrusel */
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 1rem auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .carousel img {
+      width: 100%;
+      display: none;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .carousel img.active {
+      display: block;
+      animation: fadeSlide 1s ease-in-out;
+    }
+
+    @keyframes fadeSlide {
+      from {
+        opacity: 0;
+        transform: scale(1.05);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav ul {
+        gap: 1rem;
+        margin-top: 0.5rem;
+      }
+
+      .card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .card img {
+        max-width: 100%;
+      }
+    }
+  </style>
+  <style>
+    /*  Seccion nosotros */
+    /* --- Sección general --- */
+    .section {
+      padding: 60px 20px;
+      /*   background-color: #fefcf7; */
+      color: #333;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    #nosotros {
+      position: relative;
+      /* necesario para posicionar las imágenes fuera del flujo */
+      background-color: #fefcf7;
+      border-radius: 40px;
+      padding: 60px 40px;
+      max-width: 900px;
+      margin: 60px auto;
+      color: #333;
+    }
+
+    /* --- Título --- */
+    #about-title {
+      font-size: 3.5rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #2e2e2e;
+    }
+
+    #about-title span {
+      color: #7bb661;
+      /* verde matcha */
+      font-weight: bold;
+    }
+
+    /* --- Sección general --- */
+    .section {
+      padding: 60px 20px;
+      background-color: #fefcf7;
+      color: #333;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* --- Título --- */
+    .about-title {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #2e2e2e;
+    }
+
+    .about-title span {
+      color: #7bb661;
+      /* verde matcha */
+      font-weight: bold;
+    }
+
+    /* Contenedor de la sección */
+    #nosotros {
+      position: relative;
+      background-color: #fefcf7;
+      border-radius: 40px;
+      padding: 60px 5%;
+      /* padding relativo */
+      max-width: 900px;
+      margin: 60px auto;
+      color: #333;
+    }
+
+    /* Contenedor de texto */
+    .about-container {
+      display: block;
+    }
+
+    /* Texto centrado y ancho completo */
+    .about-text {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: #444;
+    }
+
+    /* Imágenes fuera del flujo, flotando a los lados */
+    .about-image {
+      position: absolute;
+      width: 30%;
+      /* ancho relativo */
+      max-width: 250px;
+    }
+
+    .about-image:first-child {
+      left: -35%;
+      /* distancia relativa desde el borde de la sección */
+      top: 15%;
+    }
+
+    .about-image:last-child {
+      right: -35%;
+      /* distancia relativa desde el borde de la sección */
+      bottom: 0;
+    }
+
+    /* Estilo común de las fotos */
+    .about-photo {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      object-fit: cover;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 1024px) {
+      .about-image {
+        position: relative;
+        width: 45%;
+        max-width: none;
+        margin: 20px 2.5%;
+        float: left;
+      }
+
+      .about-image:first-child {
+        left: -2%;
+        /* distancia relativa desde el borde de la sección */
+        top: 0;
+      }
+
+      .about-image:last-child {
+        right: -5%;
+        /* distancia relativa desde el borde de la sección */
+        bottom: 0;
+      }
+
+
+      .about-container::after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+
+      .about-text {
+        line-height: 1.7;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <header>
+    <div style="height:60px; display:flex; align-items:center;">
+      <img src="https://i.imgur.com/d8z2lcK.png" alt="Logo Team Matcha" style="height:100%; width:auto; display:block;">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#" data-section="inicio">Inicio</a></li>
+        <li><a href="#" data-section="carta">Carta</a></li>
+        <li><a href="#" data-section="nosotros">Sobre Nosotros</a></li>
+        <li><a href="#" data-section="contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="inicio" class="section active">
+      <h2>Bienvenidx a <span style="   color: #7bb661; font-weight: bold;">Team Matcha</span></h2>
+      <p>Un lugar donde el matcha no es solo una bebida, sino un estilo de vida. Disfruta de la ceremonia del té
+        japonesa en cada detalle junto a tu postre favorito 💚</p>
+
+      <!-- Carrusel -->
+      <div class="carousel">
+        <img src="https://i.imgur.com/kLpOHva.jpeg?w=1200" alt="Cuenco de matcha" class="active">
+        <img src="https://images.unsplash.com/photo-1696029741821-22242e03c6ea?w=1200" alt="Napolimatcha">
+        <!--       <img
+          src="https://images.squarespace-cdn.com/content/v1/5eb8df4ad4280a6eb9c4edb2/1721698930973-U7P5I594A3CTCZQTFYYV/matchaya1.jpg?w=1200"
+          alt="Chashaku cucharilla de bambú con matcha"> -->
+        <img src="https://images.unsplash.com/photo-1722970782490-55e4bcacec68?w=1200" alt="Loviu so matcha">
+      </div>
+    </section>
+
+    <section id="carta" class="section">
+      <h2>Nuestra Carta</h2>
+      ¡Pasa el cursor sobre cada plato para ver cómo es!
+      <!-- Card Comidas -->
+      <div class="card">
+        <img src="https://saltedmint.com/wp-content/uploads/2024/03/Thai-green-curry-vegetarian-2.jpg"
+          alt="Comidas con matcha">
+        <div>
+          <h3>🍜 Comidas</h3>
+          <ul>
+            <li data-img="https://saltedmint.com/wp-content/uploads/2024/03/Thai-green-curry-vegetarian-2.jpg">Curry
+              verde de matcha</li>
+            <li data-img="https://i.imgur.com/Z1mJd3J.png">
+              Ramen infusionado en matcha</li>
+            <li data-img="https://i.imgur.com/wh3rC3M.png">Fideos fríos de matcha</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Card Postres -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1696029741809-12b752232b2f" alt="Postres de matcha">
+        <div>
+          <h3>🍡 Postres</h3>
+          <ul>
+            <li data-img="https://images.unsplash.com/photo-1696029741809-12b752232b2f">Napolimatcha</li>
+            <li
+              data-img="https://media.istockphoto.com/id/1367825322/es/foto/panqueques-verdes-de-t%C3%A9-matcha-con-crema-de-coco-ar%C3%A1ndanos-y-jarabe-de-arce-fondo-blanco.jpg?s=612x612&w=0&k=20&c=HKUoXsa6W5xQkvIzSY9vu6jOPrA7F97FsVzeOzJ3IJY=">
+              Tortitas de matcha</li>
+            <li
+              data-img="https://panda-patisserie.com/580-large_default/caja-dorayaki-matcha-anko-judia-roja-azuki.jpg">
+              Dorayakis de matcha</li>
+            <li
+              data-img="https://media.istockphoto.com/id/1356367959/es/foto/bolas-energ%C3%A9ticas-de-t%C3%A9-verde-matcha-crudo.jpg?s=612x612&w=0&k=20&c=_OleWdvUUoSjt0-_W_ZVdgKBeW07h85lciZ4wzIfoc8=">
+              Bolitas energéticas de matcha</li>
+            <li data-img="https://i.pinimg.com/564x/47/96/f5/4796f5c4e0076a3f8393c462740005b1.jpg">Mochis de mousse de
+              matcha</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Card Bebidas -->
+      <div class="card">
+        <img src="https://t3.ftcdn.net/jpg/06/32/25/94/240_F_632259406_Fc7x1faGHl3lP0DoMnoMp9pvMBY5ZPBh.jpg"
+          alt="Bebidas de matcha">
+        <div>
+          <h3>🍵 Bebidas</h3>
+          <ul>
+            <li data-img="https://t3.ftcdn.net/jpg/06/32/25/94/240_F_632259406_Fc7x1faGHl3lP0DoMnoMp9pvMBY5ZPBh.jpg">
+              Matcha
+              latte</li>
+            <!--     <li data-img="https://b.zmtcdn.com/data/collections/5014778669fa06ed6c25312074e41892_1745579875.png">Matcha
+              latte</li> -->
+            <li data-img="https://labuenatierra.es/wp-content/uploads/2017/11/preparar-te-matcha-tradicional.jpg">Té
+              matcha tradicional hecho con mucho mimo</li>
+
+            </br>
+            * Ofrecemos tanto versión caliente como fría, prueba ambas y decide cuál es tu favorita! 🔥❄️
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="nosotros" class="section">
+      <h2 id="about-title" class="font">Sobre <span>Nosotros</span></h2>
+      <div class="about-container">
+
+        <!-- Foto izquierda -->
+        <div class="about-image">
+          <img src="https://i.imgur.com/dIlNmpC.png" alt="Cata" class="about-photo">
+        </div>
+        <!-- Texto -->
+        <div class="about-text">
+          <p>Una mañana, cuando la ciudad todavía soñaba y el cielo despertaba, dos compañeros de
+            trabajo encontraron su pequeño ritual: preparar matcha, pero prepararlo bien. Entre el aroma delicado del
+            <span style="color:#7bb661;font-weight: bold;">té
+              verde</span> y el susurro de la varilla de <span style="color:#e0af0c;font-weight: bold;">bambú</span>, no
+            solo disfrutaban de una bebida; encontraban un
+            instante de
+            calma, un respiro para conectarse consigo mismos, un comienzo perfecto para el día.
+          </p>
+          <p>Tras un estudio exhaustivo y catas de leches, por fin dimos con la adecuada. Convivimos con más gente así
+            que había algo muy importante que hacer: firmar nuestra leche de soja para
+            diferenciarla del resto de compañeros. "La firma será TM, de Team Matcha", dijimos. Los minutos
+            matcheros se convirtieron en el mejor momento de la jornada. Y aunque otros hablaban y hacían ruido en la
+            cocina,
+            nosotros alcanzábamos un momento zen, un refugio sereno donde todo lo demás desaparecía por
+            un
+            instante.</p>
+          <p>De ese pequeño ritual nació Team Matcha, un lugar donde cada sorbo y cada bocado buscan
+            trasladarte a esa misma serenidad y alegría que descubrimos cada mañana. Desde postres delicados hasta
+            bebidas
+            reconfortantes, cada creación es una invitación a detener el tiempo, respirar profundo y saborear el
+            presente.
+          </p>
+
+          <p>Nos mueve un propósito sencillo: crear un espacio donde cada personita pueda sentir la magia del matcha,
+            acercarse a un ritual japonés ancestral y, al mismo tiempo, disfrutar de la calidez de un lugar que nace de
+            la
+            pasión y la amistad. Porque Team Matcha no es solo un local; es un homenaje a esos pequeños
+            instantes que hacen que la vida sea más dulce, más tranquila y mucho más nuestra.</p>
+        </div>
+
+        <!-- Foto derecha -->
+        <div class="about-image">
+          <img src="https://i.imgur.com/BfsZ9CZ.png" alt="Sorbiendo" class="about-photo">
+        </div>
+
+
+      </div>
+    </section>
+
+
+    <section id="contacto" class="section">
+      <h2>Contacto</h2>
+      <p>📍 Plaza San Pio X, 2, Bilbao</p>
+      <p>📞 +34 688 814 920</p>
+      <p>✉️ hola@teammatcha.com</p>
+      <iframe style="border-color: #3a5a40; border-style: solid; border-width: 5px; "
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d181.56628860126472!2d-2.9419713086790513!3d43.27110586415604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2ses!4v1756233925600!5m2!1ses!2ses"
+        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+  </main>
+
+  <footer>
+    <div style="display:flex; align-items:center; justify-content:center; gap:0.5rem; height:80px;">
+      <img src="https://i.imgur.com/91ECEUT.png" alt="Logo Footer"
+        style="height:80%; width:auto; display:block; border-radius: 30%;">
+      <p style="margin:0; line-height:40px">© 2025 Team Matcha</p>
+    </div>
+  </footer>
+
+  <script>
+    // Navegación entre secciones
+    const links = document.querySelectorAll("nav a");
+    const sections = document.querySelectorAll(".section");
+
+    links.forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const target = link.getAttribute("data-section");
+
+        sections.forEach(sec => sec.classList.remove("active"));
+        document.getElementById(target).classList.add("active");
+      });
+    });
+
+    // Carrusel automático
+    const carouselImages = document.querySelectorAll(".carousel img");
+    let currentIndex = 0;
+
+    function showNextImage() {
+      carouselImages[currentIndex].classList.remove("active");
+      currentIndex = (currentIndex + 1) % carouselImages.length;
+      carouselImages[currentIndex].classList.add("active");
+    }
+
+    setInterval(showNextImage, 4000);
+
+    // Selección de elementos carta
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+      const img = card.querySelector("img");
+      const items = card.querySelectorAll("li");
+
+      items.forEach(item => {
+        item.addEventListener("mouseenter", () => {
+          img.src = item.dataset.img;
+        });
+        /*  item.addEventListener("mouseleave", () => {
+           // Al salir, volver a la imagen principal de la card
+           const cardIndex = Array.from(cards).indexOf(card) + 1;
+           img.src = `https://i.imgur.com/91ECEUT.png`;
+         }); */
+      });
+    });
+
+    //Nosotros
+    // Opcional: efecto de zoom suave en scroll, también encapsulado
+    document.addEventListener("scroll", () => {
+      document.querySelectorAll("#nosotros .about-photo").forEach(photo => {
+        const rect = photo.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          photo.style.transform = "scale(1.05)";
+        } else {
+          photo.style.transform = "scale(1)";
+        }
+      });
+    });
+
+  </script>
+</body>
+
+</html>
